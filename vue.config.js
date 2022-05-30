@@ -8,7 +8,6 @@ function resolve(dir) {
 
 module.exports = {
   publicPath: '/nAnB',
-
   outputDir: 'docs',
   assetsDir: 'static',
   productionSourceMap: false,
@@ -119,6 +118,18 @@ module.exports = {
           }
         }
       }
+    }
+  },
+
+  pluginOptions: {
+    i18n: {
+      locale: 'zh_TW',
+      fallbackLocale: 'zh_TW',
+      localeDir: 'locales',
+      enableLegacy: false,
+      runtimeOnly: false,
+      compositionOnly: false,
+      fullInstall: true
     }
   }
 }
