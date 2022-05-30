@@ -7,7 +7,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  publicPath: 'nAnB',
+  publicPath: '/nAnB',
 
   outputDir: 'docs',
   assetsDir: 'static',
