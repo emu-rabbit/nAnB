@@ -47,6 +47,7 @@ export default {
     .input {
       width: 100%;
       padding: 0 4vw;
+      vertical-align: bottom;
 
       &:focus {
         outline: none;
@@ -55,7 +56,6 @@ export default {
 
     .btn {
       width: 20%;
-      transform: translateY(1.2px);
       margin-left: -20%;
       border-left: #151515 1px solid;
     }
