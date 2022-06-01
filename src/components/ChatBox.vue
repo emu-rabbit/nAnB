@@ -1,6 +1,8 @@
 <template>
   <div :class="$style.container">
-    <div :class="$style.message"></div>
+    <div :class="$style.message">
+      <message from="bot" message="asd" />
+    </div>
     <div :class="$style.controls">
       <input :class="$style.input" @keydown.enter="$emit('user-message', $event.target.value)" />
       <button :class="$style.btn">送出</button>
@@ -8,17 +10,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  setup(props, { expose }) {
-    const newMessage = str => {
-      console.log(str)
-    }
-    expose({
-      newMessage
-    })
-  }
+
+
+<script setup>
+import { defineExpose } from 'vue'
+import Message from '@/components/Message.vue'
+
+const newMessage = str => {
+  console.log(str)
 }
+
+defineExpose({
+  newMessage
+})
 </script>
 
 <style lang="scss" module>
@@ -27,7 +31,11 @@ export default {
   position: relative;
 
   .message {
-    height: 100%;
+    height: calc(100% - 10vh);
+    padding: 0 6%;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: scroll;
   }
 
   .controls {
