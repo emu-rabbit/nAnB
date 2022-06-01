@@ -4,11 +4,11 @@ import Layout from '@/layout/index.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/tutorial',
+    redirect: '/chat',
     component: Layout,
     children: [{
-      path: 'tutorial',
-      component: () => import('@/views/Tutorial.vue')
+      path: 'chat',
+      component: () => import('@/views/Chat.vue')
     }]
   }
 ]
