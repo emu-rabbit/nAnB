@@ -40,7 +40,6 @@ export default {
     .input, .btn {
       height: 6vh;
       background-color: #424447;
-      border: 0;
       border: #151515 1px solid;
       color: white;
     }
@@ -56,7 +55,7 @@ export default {
 
     .btn {
       width: 20%;
-      transform: translateY(0.12vh);
+      transform: translateY(1.2px);
       margin-left: -20%;
       border-left: #151515 1px solid;
     }
