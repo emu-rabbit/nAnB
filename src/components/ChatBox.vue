@@ -1,7 +1,12 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.message">
-      <message from="bot" message="asd" />
+      <message
+        v-for="(message, index) in messages"
+        :key="index"
+        :from="message.from"
+        :message="message.message"
+      />
     </div>
     <div :class="$style.controls">
       <input :class="$style.input" @keydown.enter="$emit('user-message', $event.target.value)" />
@@ -13,11 +18,16 @@
 
 
 <script setup>
-import { defineExpose } from 'vue'
+import { defineExpose, reactive } from 'vue'
 import Message from '@/components/Message.vue'
 
-const newMessage = str => {
-  console.log(str)
+const messages = reactive([])
+
+const newMessage = (from, message) => {
+  messages.unshift({
+    from,
+    message
+  })
 }
 
 defineExpose({
@@ -35,7 +45,29 @@ defineExpose({
     padding: 0 6%;
     display: flex;
     flex-direction: column-reverse;
-    overflow: scroll;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-button {
+      background: transparent;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgb(0, 0, 0);
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: transparent;
+    }
   }
 
   .controls {
@@ -54,7 +86,7 @@ defineExpose({
 
     .input {
       width: 100%;
-      padding: 0 4vw;
+      padding: 0 4%;
       vertical-align: bottom;
 
       &:focus {

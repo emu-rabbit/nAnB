@@ -10,7 +10,7 @@ class Bot {
     this.echoStep()
   }
   speak(str) {
-    this.chatInstance.newMessage(str)
+    this.chatInstance.newMessage('bot', str)
   }
   read() {
     return new Promise(resolve => {
@@ -18,6 +18,7 @@ class Bot {
     })
   }
   input(str) {
+    this.chatInstance.newMessage('user', str)
     this.readResolver(str)
   }
   run(step) {
@@ -27,7 +28,7 @@ class Bot {
   echoStep = async () => {
     this.speak('Hello I\'m echo')
     const result = await this.read()
-    this.speak(result)
+    console.log(result)
     this.run(this.echoStep)
   }
 }
