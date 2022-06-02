@@ -9,8 +9,9 @@
       />
     </div>
     <div :class="$style.controls">
-      <input :class="$style.input" @keydown.enter="$emit('user-message', $event.target.value)" />
-      <button :class="$style.btn">送出</button>
+      <span :class="$style.writing" :style="{visibility: writing ? 'visible' : 'hidden'}">{{ t('bot_is_writing') }}</span>
+      <input ref="input" :class="$style.input" @keydown.enter="handleInput()" />
+      <button :class="$style.btn" @click="handleInput()">送出</button>
     </div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 
 
 <script setup>
-import { defineExpose, reactive } from 'vue'
+import { defineExpose, defineEmits, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Message from '@/components/Message.vue'
 
-const messages = reactive([])
+const { t } = useI18n()
 
+const messages = reactive([])
 const newMessage = (from, message) => {
   messages.unshift({
     from,
@@ -30,8 +33,23 @@ const newMessage = (from, message) => {
   })
 }
 
+const writing = ref(false)
+const markWriting = (writingIn) => {
+  writing.value = writingIn
+}
+
+const input = ref(null)
+const emit = defineEmits(['user-message'])
+const handleInput = () => {
+  if (input.value) {
+    emit('user-message', input.value.value)
+    input.value.value = ''
+  }
+}
+
 defineExpose({
-  newMessage
+  newMessage,
+  markWriting
 })
 </script>
 
@@ -41,7 +59,7 @@ defineExpose({
   position: relative;
 
   .message {
-    height: calc(100% - 10vh);
+    height: calc(100% - 12vh);
     padding: 0 6%;
     display: flex;
     flex-direction: column-reverse;
@@ -73,9 +91,16 @@ defineExpose({
   .controls {
     position: absolute;
     bottom: 2vh;
-    height: 6vh;
+    height: 10vh;
     width: 96%;
     margin-left: 2%;
+
+    .writing {
+      display: block;
+      height: 2.8vh;
+      padding: 0 4%;
+      font-size: 0.9rem;
+    }
 
     .input, .btn {
       height: 6vh;
