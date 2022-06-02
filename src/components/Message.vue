@@ -5,7 +5,7 @@
     </div>
     <div :class="$style.right">
       <div>{{ t(`${from}_name`) }}</div>
-      <div v-for="(message, index) in messages" :key="index">{{ message }}</div>
+      <div :class="$style.message" v-for="(message, index) in messages" :key="index">{{ message }}</div>
     </div>
   </div>
 </template>
@@ -46,6 +46,10 @@ defineProps({
     padding-left: 4%;
     overflow-wrap: break-word;
     vertical-align: top;
+
+    .message {
+      font-size: 0.9rem;
+    }
   }
   .img {
     width: 100%;

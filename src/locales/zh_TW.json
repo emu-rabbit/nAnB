@@ -1,5 +1,12 @@
 {
   "bot_name": "夢夢",
   "user_name": "你",
-  "bot_is_writing": "夢夢正在輸入..."
+  "bot_is_writing": "夢夢正在輸入...",
+  "echo_hello": "哈囉我是回聲鼠鼠~",
+  "menu_intro_0": "請參考我的主選單：",
+  "menu_intro_1": "1. nAnB猜題(不重複)",
+  "menu_intro_2": "2. nAnB出題(不重複)",
+  "menu_intro_3": "順帶一提吃掉我不在選項中喔！>.0",
+  "input_validate_failed": "我只是一隻鼠鼠，我聽不懂你在說啥",
+  "leave": "(夢夢已離開聊天室)"
 }
