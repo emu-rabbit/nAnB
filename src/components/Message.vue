@@ -5,7 +5,7 @@
     </div>
     <div :class="$style.right">
       <div>{{ t(`${from}_name`) }}</div>
-      <div>{{ message }}</div>
+      <div v-for="(message, index) in messages" :key="index">{{ message }}</div>
     </div>
   </div>
 </template>
@@ -21,8 +21,8 @@ defineProps({
     type: String,
     default: 'bot'
   },
-  message: {
-    type: String,
+  messages: {
+    type: Array,
     required: true
   }
 })
@@ -31,7 +31,7 @@ defineProps({
 <style lang="scss" module>
 .container {
   width: 100%;
-  margin-bottom: 1vh;
+  margin-bottom: 2.5vh;
 
   .left, .right {
     display: inline-block;

@@ -5,7 +5,7 @@
         v-for="(message, index) in messages"
         :key="index"
         :from="message.from"
-        :message="message.message"
+        :messages="message.message"
       />
     </div>
     <div :class="$style.controls">
@@ -27,10 +27,14 @@ const { t } = useI18n()
 
 const messages = reactive([])
 const newMessage = (from, message) => {
-  messages.unshift({
-    from,
-    message
-  })
+  if (messages[0] && messages[0].from === from) {
+    messages[0].message.push(message)
+  } else {
+    messages.unshift({
+      from,
+      message: [message]
+    })
+  }
 }
 
 const writing = ref(false)
