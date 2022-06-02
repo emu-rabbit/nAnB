@@ -9,6 +9,7 @@
   "menu_intro_3": "順帶一提吃掉我不在選項中喔！>.0",
   "nanb_guesser_intro": "鼠鼠我想了一個%{count}位數字，你來猜猜看。",
   "you_win": "你贏了！",
+  "saved_to_clipboard": "夢夢施展了黑魔法，本次表現已存進剪貼簿，歡迎分享",
   "input_validate_failed": "我只是一隻鼠鼠，我聽不懂你在說啥",
   "under_dev": "此功能還在開發中...",
   "leave": "(夢夢已離開聊天室)"

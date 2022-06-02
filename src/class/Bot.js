@@ -103,6 +103,8 @@ export default class Bot {
     } while(ab.a !== n)
 
     await this.speak(t('you_win'))
+    await navigator.clipboard.writeText(nAnB.generateShare())
+    await this.speak(t('saved_to_clipboard'))
     this.run(this.menuStep)
   }
   nAnBQuestionerStep = async () => {
