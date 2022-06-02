@@ -25,15 +25,21 @@ import Message from '@/components/Message.vue'
 
 const { t } = useI18n()
 
+const endOfSection = ref(false)
+const markSection = () => {
+  endOfSection.value = true
+}
+
 const messages = reactive([])
 const newMessage = (from, message) => {
-  if (messages[0] && messages[0].from === from) {
+  if (messages[0] && messages[0].from === from && !endOfSection.value) {
     messages[0].message.push(message)
   } else {
     messages.unshift({
       from,
       message: [message]
     })
+    if (endOfSection.value) endOfSection.value = false
   }
 }
 
@@ -53,7 +59,8 @@ const handleInput = () => {
 
 defineExpose({
   newMessage,
-  markWriting
+  markWriting,
+  markSection
 })
 </script>
 

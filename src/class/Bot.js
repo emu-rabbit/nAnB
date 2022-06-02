@@ -1,4 +1,5 @@
 import i18n from '@/i18n.js'
+import nAnBQuestioner from './nAnBQuestioner'
 import Parsers from './Parsers'
 import Validators from './Validators'
 
@@ -12,7 +13,7 @@ export default class Bot {
     this.inputValidator = () => true
     this.readResolver = () => {}
 
-    this.wrongTime = 0
+    this.wrongCount = 0
 
     this.echoFirst = true
 
@@ -40,7 +41,7 @@ export default class Bot {
   input(str) {
     this.chatInstance.newMessage('user', str)
 
-    if (this.wrongTime >= 5) return
+    if (this.wrongCount >= 5) return
 
     if (this.inputValidator(str)) {
       const parsed = this.inputParser(str)
@@ -48,21 +49,22 @@ export default class Bot {
       this.readResolver = () => {}
     } else {
       this.speak(t('input_validate_failed'))
-      this.wrongTime ++
+      this.wrongCount ++
 
-      if (this.wrongTime >= 5) {
+      if (this.wrongCount >= 5) {
         this.speak(t('leave'))
         this.readResolver = () => {}
       }
     }
   }
-  run(step) {
-    step(this)
-  }
   static wait(millionSecond){
     return new Promise(resolve => {
         setTimeout(resolve, millionSecond);
     });
+  }
+  async run(step) {
+    await step()
+    this.chatInstance.markSection()
   }
   // Steps
   echoStep = async () => {
@@ -76,7 +78,7 @@ export default class Bot {
   }
   menuStep = async () => {
     await this.speakRange('menu_intro', 3)
-    const result = await this.read(Parsers.int, Validators.range(1, 2))
+    const result = await this.read(Parsers.int(), Validators.range(1, 2))
     switch (result) {
       case 1:
         this.run(this.nAnBGuesserStep)
@@ -86,6 +88,25 @@ export default class Bot {
         break
     }
   }
-  nAnBGuesserStep = async () => {}
-  nAnBQuestionerStep = async () => {}
+  nAnBGuesserStep = async () => {
+    const n = 5
+    await this.speak(t('nanb_guesser_intro', { count: n }))
+
+    const nAnB = new nAnBQuestioner(n)
+    console.log({ ans: nAnB.ans })
+
+    let ab
+    do {
+      const result = await this.read(Parsers.cut(n), Validators.nAnBAnswer(n, false))
+      ab = nAnB.judge(result)
+      await this.speak(`${ab.a}A${ab.b}B`)
+    } while(ab.a !== n)
+
+    await this.speak(t('you_win'))
+    this.run(this.menuStep)
+  }
+  nAnBQuestionerStep = async () => {
+    await this.speak(t('under_dev'))
+    this.run(this.menuStep)
+  }
 }
