@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <div :class="$style.message">
+    <div ref="messageEl" :class="$style.message">
       <message
         v-for="(message, index) in messages"
         :key="index"
@@ -31,6 +31,7 @@ const markSection = () => {
 }
 
 const messages = reactive([])
+const messageEl = ref(null)
 const newMessage = (from, message) => {
   if (messages[0] && messages[0].from === from && !endOfSection.value) {
     messages[0].message.push(message)
@@ -40,6 +41,9 @@ const newMessage = (from, message) => {
       message: [message]
     })
     if (endOfSection.value) endOfSection.value = false
+  }
+  if (messageEl.value) {
+    messageEl.value.scrollTo(0, 0)
   }
 }
 
