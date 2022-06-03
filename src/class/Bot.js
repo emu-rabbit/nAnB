@@ -78,8 +78,8 @@ export default class Bot {
     this.run(this.echoStep)
   }
   menuStep = async () => {
-    await this.speakRange('menu_intro', 3)
-    const result = await this.read(Parsers.int(), Validators.range(1, 2))
+    await this.speakRange('menu_intro', 4)
+    const result = await this.read(Parsers.int(), Validators.range(1, 3))
     switch (result) {
       case 1:
         this.run(this.nAnBGuesserStep)
@@ -87,6 +87,8 @@ export default class Bot {
       case 2:
         this.run(this.nAnBQuestionerStep)
         break
+      case 3:
+        this.run(this.tutorialStep)
     }
   }
   nAnBGuesserStep = async () => {
@@ -147,6 +149,10 @@ export default class Bot {
 
 
     
+    this.run(this.menuStep)
+  }
+  tutorialStep = async () => {
+    await this.speakRange('tutorial', 7)
     this.run(this.menuStep)
   }
 }
