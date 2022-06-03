@@ -43,7 +43,7 @@ const newMessage = (from, message) => {
     if (endOfSection.value) endOfSection.value = false
   }
   if (messageEl.value) {
-    messageEl.value.scrollTo(0, 0)
+    messageEl.value.scrollTo(0, messageEl.value.scrollHeight)
   }
 }
 
