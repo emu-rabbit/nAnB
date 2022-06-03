@@ -3,25 +3,8 @@
 ## GitPage
 https://immortalmice.github.io/nAnB/#/chat
 
-## Project setup
-```
-npm install
-```
+這是一個聊天室風格的nAnB機器人
+夢夢是我家的黃金鼠，她叫夢夢但這是廢話
+感謝好友提供的自家貓貓照片，他叫小咪
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+感謝[Discord](https://discord.com/)和[wordle](https://www.nytimes.com/games/wordle/index.html)提供設計靈感
