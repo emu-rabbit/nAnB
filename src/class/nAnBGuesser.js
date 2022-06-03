@@ -1,3 +1,5 @@
+import judge from '@/utils/judger'
+
 export default class nAnBGuesser {
   constructor(n) {
     this.n = n
@@ -24,6 +26,7 @@ export default class nAnBGuesser {
   }
 
   guess() {
+    if (this.pool.length === 0) throw new Error('pool_empty')
     const g = this.pool[Math.floor(Math.random() * this.pool.length)]
     this.history.push(g)
     return g
@@ -33,7 +36,7 @@ export default class nAnBGuesser {
     const { a, b } = ab
     let tmp = []
     for(let i = 0; i <= this.pool.length-1; i ++) {
-      const ab = this.judge(this.pool[i]);
+      const ab = judge(this.history[this.history.length - 1], this.pool[i]);
       if (ab.a === a && ab.b === b) {
         tmp.push(this.pool[i])
       }
@@ -42,22 +45,16 @@ export default class nAnBGuesser {
     console.log({ poolLength: this.pool.length })
   }
 
-  judge(n) {
-    const m = this.history[this.history.length - 1]
-    let a = 0, b = 0
-    for(let i = 0; i <= this.n-1; i ++) {
-      if (m.indexOf(n[i]) !== -1) {
-        b++
-      }
-    }
-    for(let i = 0; i <= this.n-1; i ++) {
-      if (m[i] === n[i]) {
-        a++
-        b--
-      }
-    }
-    return {
-      a, b
-    }
+  generateShare() {
+    let str = ''
+    this.history.forEach(h => {
+      const { pattern: s } = judge(h, this.history[this.history.length-1])
+      let newS = ''
+      newS = s.replace(/-/g, '\u2b1c')
+      newS = newS.replace(/B/g, '\ud83d\udfe8')
+      newS = newS.replace(/A/g, '\ud83d\udfe9')
+      str += `${newS}\n`
+    })
+    return str
   }
 }

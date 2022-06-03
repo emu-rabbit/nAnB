@@ -99,13 +99,19 @@ export default class Bot {
     let ab
     do {
       const result = await this.read(Parsers.cut(n), Validators.nAnBAnswer(n, false))
-      ab = nAnB.judge(result)
+      ab = nAnB.onGuess(result)
       await this.speak(`${ab.a}A${ab.b}B`)
     } while(ab.a !== n)
 
     await this.speak(t('you_win'))
-    await navigator.clipboard.writeText(nAnB.generateShare())
-    await this.speak(t('saved_to_clipboard'))
+    try {
+      await navigator.clipboard.writeText(nAnB.generateShare())
+      await this.speak(t('saved_to_clipboard'))
+    } catch (e) {
+      console.log(e)
+      await this.speak(t('unsaved_to_clipboard'))
+    }
+    
     this.run(this.menuStep)
   }
   nAnBQuestionerStep = async () => {
@@ -113,15 +119,34 @@ export default class Bot {
 
     const nAnB = new nAnBGuesser(n)
 
-    let ab
-    do {
-      const g = nAnB.guess()
-      await this.speak(t('nanb_questioner_guess', { guess: g }))
-      ab = await this.read(Parsers.ab(), Validators.nAnBab(n))
-      nAnB.applyAB(ab)
-    } while(ab.a !== n)
+    try {
+      let ab
+      do {
+        const g = nAnB.guess()
+        await this.speak(t('nanb_questioner_guess', { guess: g }))
+        ab = await this.read(Parsers.ab(), Validators.nAnBab(n))
+        nAnB.applyAB(ab)
+      } while(ab.a !== n)
 
-    await this.speak(t('i_win'))
+      await this.speak(t('i_win'))
+      try {
+        await navigator.clipboard.writeText(nAnB.generateShare())
+        await this.speak(t('saved_to_clipboard'))
+      } catch (e) {
+        console.log(e)
+        await this.speak(t('unsaved_to_clipboard'))
+      }
+
+    } catch (e) {
+      if (e.message === 'pool_empty') {
+        await this.speak(t('nanb_questioner_pool_empty'))
+      } else {
+        throw e
+      }
+    }
+
+
+    
     this.run(this.menuStep)
   }
 }

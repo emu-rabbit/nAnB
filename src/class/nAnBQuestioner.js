@@ -1,3 +1,5 @@
+import judge from '@/utils/judger'
+
 export default class nAnBQuestioner {
   constructor(n) {
     this.n = n
@@ -13,23 +15,9 @@ export default class nAnBQuestioner {
     this.history = []
   }
 
-  judge(m) {
-    let arr = ['-', '-', '-', '-', '-']
-    let a = 0, b = 0
-    for(let i = 0; i <= this.n-1; i ++) {
-      if (m.indexOf(this.ans[i]) !== -1) {
-        arr[i] = 'B'
-        b++
-      }
-    }
-    for(let i = 0; i <= this.n-1; i ++) {
-      if (m[i] === this.ans[i]) {
-        arr[i] = 'A'
-        a++
-        b--
-      }
-    }
-    this.history.push(arr.join(''))
+  onGuess(m) {
+    const { a, b, pattern } = judge(m, this.ans)
+    this.history.push(pattern)
     return {
       a, b
     }
