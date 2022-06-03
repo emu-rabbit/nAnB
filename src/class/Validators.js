@@ -14,4 +14,14 @@ export default class Validators {
       return /^\d+$/.test(s) && !/(.).*\1/.test(s)
     }
   }
+  static nAnBab(n) {
+    return str => {
+      const ab = {
+        a: parseInt(str[0]),
+        b: parseInt(str[2])
+      }
+
+      return !isNaN(ab.a) && !isNaN(ab.b) && ab.a + ab.b <= n
+    }
+  }
 }

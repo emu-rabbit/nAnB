@@ -1,4 +1,5 @@
 import i18n from '@/i18n.js'
+import nAnBGuesser from './nAnBGuesser'
 import nAnBQuestioner from './nAnBQuestioner'
 import Parsers from './Parsers'
 import Validators from './Validators'
@@ -108,7 +109,19 @@ export default class Bot {
     this.run(this.menuStep)
   }
   nAnBQuestionerStep = async () => {
-    await this.speak(t('under_dev'))
+    const n = 5
+
+    const nAnB = new nAnBGuesser(n)
+
+    let ab
+    do {
+      const g = nAnB.guess()
+      await this.speak(t('nanb_questioner_guess', { guess: g }))
+      ab = await this.read(Parsers.ab(), Validators.nAnBab(n))
+      nAnB.applyAB(ab)
+    } while(ab.a !== n)
+
+    await this.speak(t('i_win'))
     this.run(this.menuStep)
   }
 }
