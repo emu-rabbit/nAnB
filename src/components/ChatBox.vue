@@ -23,7 +23,7 @@
 
 
 <script setup>
-import { defineExpose, defineEmits, reactive, ref } from 'vue'
+import { defineExpose, defineEmits, reactive, ref, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Message from '@/components/Message.vue'
 
@@ -54,9 +54,11 @@ const newMessage = (from, message) => {
     })
     if (endOfSection.value) endOfSection.value = false
   }
-  if (messageEl.value && messageEl.value.scrollTop < 0) {
-    isBottom.value = false
-  }
+  nextTick(() => {
+    if (messageEl.value && messageEl.value.scrollTop < 0) {
+      isBottom.value = false
+    }
+  })
 }
 
 const writing = ref(false)
