@@ -9,9 +9,9 @@ export default class Validators {
     return str => {
       const s = str.substring(0, n)
       if (isRepeat) {
-        return /^\d+$/.test(s)
+        return str.length === n && /^\d+$/.test(s)
       }
-      return /^\d+$/.test(s) && !/(.).*\1/.test(s)
+      return str.length === n && /^\d+$/.test(s) && !/(.).*\1/.test(s)
     }
   }
   static nAnBab(n) {
@@ -21,7 +21,12 @@ export default class Validators {
         b: parseInt(str[2])
       }
 
-      return !isNaN(ab.a) && !isNaN(ab.b) && ab.a + ab.b <= n
+      return str.length <= 4
+        && (str[1].toLowerCase() === 'A' || str[1].toLowerCase() === 'a' || str[1] === ' ') 
+        && (!str[3] || str[3].toLowerCase() === 'B' || str[3].toLowerCase() === 'b') 
+        && !isNaN(ab.a) 
+        && !isNaN(ab.b) 
+        && ab.a + ab.b <= n
     }
   }
 }
