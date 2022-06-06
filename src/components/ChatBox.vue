@@ -108,6 +108,8 @@ defineExpose({
     flex-direction: column-reverse;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    scrollbar-color: rgb(80, 80, 80) transparent;
+    scrollbar-width: thin;
 
     &::-webkit-scrollbar {
       width: 7px;
@@ -124,7 +126,7 @@ defineExpose({
 
     &::-webkit-scrollbar-thumb {
       border-radius: 4px;
-      background-color: rgb(0, 0, 0);
+      background-color: rgb(80, 80, 80);
     }
 
     &::-webkit-scrollbar-track {
