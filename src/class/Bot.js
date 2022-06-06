@@ -154,8 +154,6 @@ export default class Bot {
       }
     }
 
-
-    
     this.run(this.menuStep)
   }
   tutorialStep = async () => {
