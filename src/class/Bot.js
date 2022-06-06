@@ -102,6 +102,7 @@ export default class Bot {
     do {
       const result = await this.read(Parsers.cut(n), Validators.nAnBAnswer(n, false))
       ab = nAnB.onGuess(result)
+      if (ab.a === n) break
       await this.speak(`${ab.a}A${ab.b}B`)
     } while(ab.a !== n)
 
@@ -114,6 +115,7 @@ export default class Bot {
       clipboardResult = t('unsaved_to_clipboard')
     }
 
+    await this.speak(`${n}A0B`)
     await this.speak(t('you_win'))
     await this.speak(clipboardResult)
     
