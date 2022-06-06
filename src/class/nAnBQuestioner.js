@@ -24,7 +24,8 @@ export default class nAnBQuestioner {
   }
 
   generateShare() {
-    let str = ''
+    let str = 'nAnB Guesser!\n'
+    str += `~${this.history.length} Round~\n`
     this.history.forEach(s => {
       let newS = ''
       newS = s.replace(/-/g, '\u2b1c')

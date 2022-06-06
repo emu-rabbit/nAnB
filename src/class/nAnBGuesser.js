@@ -46,7 +46,8 @@ export default class nAnBGuesser {
   }
 
   generateShare() {
-    let str = ''
+    let str = 'nAnB Questioner!\n'
+    str += `~${this.history.length} Round~\n`
     this.history.forEach(h => {
       const { pattern: s } = judge(h, this.history[this.history.length-1])
       let newS = ''
