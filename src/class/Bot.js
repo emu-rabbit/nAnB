@@ -115,7 +115,6 @@ export default class Bot {
       clipboardResult = t('unsaved_to_clipboard')
     }
 
-    await this.speak(`${n}A0B`)
     await this.speak(t('you_win'))
     await this.speak(clipboardResult)
     
