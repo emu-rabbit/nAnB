@@ -105,14 +105,17 @@ export default class Bot {
       await this.speak(`${ab.a}A${ab.b}B`)
     } while(ab.a !== n)
 
-    await this.speak(t('you_win'))
+    let clipboardResult
     try {
       await navigator.clipboard.writeText(nAnB.generateShare())
-      await this.speak(t('saved_to_clipboard'))
+      clipboardResult = t('saved_to_clipboard')
     } catch (e) {
       console.log(e)
-      await this.speak(t('unsaved_to_clipboard'))
+      clipboardResult = t('unsaved_to_clipboard')
     }
+
+    await this.speak(t('you_win'))
+    await this.speak(clipboardResult)
     
     this.run(this.menuStep)
   }
@@ -130,14 +133,17 @@ export default class Bot {
         nAnB.applyAB(ab)
       } while(ab.a !== n)
 
-      await this.speak(t('i_win'))
+      let clipboardResult
       try {
         await navigator.clipboard.writeText(nAnB.generateShare())
-        await this.speak(t('saved_to_clipboard'))
+        clipboardResult = t('saved_to_clipboard')
       } catch (e) {
         console.log(e)
-        await this.speak(t('unsaved_to_clipboard'))
+        clipboardResult = t('unsaved_to_clipboard')
       }
+
+      await this.speak(t('i_win'))
+      await this.speak(clipboardResult)
 
     } catch (e) {
       if (e.message === 'pool_empty') {
