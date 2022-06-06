@@ -70,7 +70,7 @@ const markWriting = (writingIn) => {
 const input = ref(null)
 const emit = defineEmits(['user-message'])
 const handleInput = () => {
-  if (input.value) {
+  if (input.value && input.value.value) {
     emit('user-message', input.value.value)
     input.value.value = ''
   }
@@ -167,6 +167,7 @@ defineExpose({
       width: 20%;
       margin-left: -20%;
       border-left: #151515 1px solid;
+      cursor: pointer;
     }
   }
 }
