@@ -1,5 +1,9 @@
 <template>
   <div :class="$style.container">
+    <div v-show="!isBottom" :class="$style.new" @click="markRead">
+      <span>{{ t('new_message') }}</span>
+      <span>{{ t('mark_read') }}</span>
+    </div>
     <div ref="messageEl" :class="$style.message">
       <message
         v-for="(message, index) in messages"
@@ -30,6 +34,14 @@ const markSection = () => {
   endOfSection.value = true
 }
 
+const isBottom = ref(true)
+const markRead = () => {
+  if (messageEl.value) {
+    messageEl.value.scrollTo(0, 0)
+    isBottom.value = true
+  }
+}
+
 const messages = reactive([])
 const messageEl = ref(null)
 const newMessage = (from, message) => {
@@ -42,8 +54,8 @@ const newMessage = (from, message) => {
     })
     if (endOfSection.value) endOfSection.value = false
   }
-  if (messageEl.value) {
-    messageEl.value.scrollTo(0, messageEl.value.scrollHeight)
+  if (messageEl.value && messageEl.value.scrollTop < 0) {
+    isBottom.value = false
   }
 }
 
@@ -73,12 +85,26 @@ defineExpose({
   width: 100%;
   position: relative;
 
+  .new {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1rem;
+    background-color: rgb(86, 99, 233);
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
   .message {
     height: calc(100% - 12vh);
     padding: 0 6%;
     display: flex;
     flex-direction: column-reverse;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
       width: 7px;
