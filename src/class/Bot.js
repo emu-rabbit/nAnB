@@ -164,4 +164,9 @@ export default class Bot {
     await this.speakRange('tutorial', 7)
     this.run(this.menuStep)
   }
+  localeStep = async () => {
+    await this.speak('1. 繁體中文')
+    await this.speak('2. English')
+    await this.speak(t('enter_the_number'))
+  }
 }
