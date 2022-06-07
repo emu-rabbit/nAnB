@@ -176,7 +176,6 @@ export default class Bot {
     await this.speak('2. English')
     await this.speak(t('enter_the_number'))
     const result = await this.read(Parsers.int(), Validators.range(1, 2))
-    console.log(i18n.global)
     switch (result) {
       case 1:
         i18n.global.locale.value = 'zh_TW'
