@@ -1,3 +1,4 @@
+import { watch } from 'vue'
 import { createI18n } from 'vue-i18n'
 
 /**
@@ -19,9 +20,16 @@ function loadLocaleMessages() {
   return messages
 }
 
-export default createI18n({
+const i18n = createI18n({
   legacy: false,
-  locale: process.env.VUE_APP_I18N_LOCALE || 'en',
-  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+  locale: localStorage.getItem('locale') || process.env.VUE_APP_I18N_LOCALE,
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE,
   messages: loadLocaleMessages()
 })
+
+// Handle locale changed
+watch(i18n.global.locale, (newLocale) => {
+  localStorage.setItem('locale', newLocale)
+})
+
+export default i18n

@@ -18,7 +18,11 @@ export default class Bot {
 
     this.echoFirst = true
 
-    this.run(this.menuStep)
+    if (!localStorage.getItem('locale')) {
+      this.run(this.localeStep)
+    } else {
+      this.run(this.menuStep)
+    }
   }
   async speak(str) {
     await Bot.wait(400)
@@ -82,8 +86,8 @@ export default class Bot {
     this.run(this.echoStep)
   }
   menuStep = async () => {
-    await this.speakRange('menu_intro', 4)
-    const result = await this.read(Parsers.int(), Validators.range(1, 3))
+    await this.speakRange('menu_intro', 5)
+    const result = await this.read(Parsers.int(), Validators.range(1, 4))
     switch (result) {
       case 1:
         this.run(this.nAnBGuesserStep)
@@ -93,6 +97,9 @@ export default class Bot {
         break
       case 3:
         this.run(this.tutorialStep)
+        break
+      case 4:
+        this.run(this.localeStep)
     }
   }
   nAnBGuesserStep = async () => {
@@ -168,5 +175,16 @@ export default class Bot {
     await this.speak('1. 繁體中文')
     await this.speak('2. English')
     await this.speak(t('enter_the_number'))
+    const result = await this.read(Parsers.int(), Validators.range(1, 2))
+    console.log(i18n.global)
+    switch (result) {
+      case 1:
+        i18n.global.locale.value = 'zh_TW'
+        break
+      case 2:
+        i18n.global.locale.value = 'en_US'
+        break
+    }
+    this.run(this.menuStep)
   }
 }
