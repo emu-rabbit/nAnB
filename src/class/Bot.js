@@ -32,6 +32,10 @@ export default class Bot {
       await this.speak(t(`${key}_${i}`))
     }
   }
+  async speakRandom(key, option, length) {
+    const r = Math.floor(Math.random() * length)
+    await this.speak(t(`${key}_${r}`, option))
+  }
   read(parser, validator) {
     return new Promise(resolve => {
       this.inputParser = parser ?? (str => str)
@@ -49,7 +53,7 @@ export default class Bot {
       this.readResolver(parsed)
       this.readResolver = () => {}
     } else {
-      this.speak(t('input_validate_failed'))
+      this.speakRandom('input_validate_failed', {}, 3)
       this.wrongCount ++
 
       if (this.wrongCount >= 5) {
@@ -103,7 +107,7 @@ export default class Bot {
       const result = await this.read(Parsers.cut(n), Validators.nAnBAnswer(n, false))
       ab = nAnB.onGuess(result)
       if (ab.a === n) break
-      await this.speak(`${ab.a}A${ab.b}B`)
+      await this.speakRandom('nanb_guesser_ab', ab, 3)
     } while(ab.a !== n)
 
     let clipboardResult
@@ -129,7 +133,7 @@ export default class Bot {
       let ab
       do {
         const g = nAnB.guess()
-        await this.speak(t('nanb_questioner_guess', { guess: g }))
+        await this.speakRandom('nanb_questioner_guess', { guess: g }, 3)
         ab = await this.read(Parsers.ab(), Validators.nAnBab(n))
         nAnB.applyAB(ab)
       } while(ab.a !== n)
