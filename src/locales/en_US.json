@@ -9,7 +9,7 @@
   "menu_intro_1": "1. I want to guess an nAnB question(No repetition)",
   "menu_intro_2": "2. I want an nAnB question to let MuMu guess(No repetition)",
   "menu_intro_3": "3. I want to see the tutorial",
-  "menu_intro_4": "4. Change locale",
+  "menu_intro_4": "4. Language setting",
   "menu_intro_5": "BTW, eating me is not in the options >.0",
   "nanb_guesser_intro": "Me, MuMu, come up with %{count} digits numbers，No digits are the same，try to guess it.",
   "nanb_guesser_ab_0": "%{a}A%{b}B，Cheer up.",

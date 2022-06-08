@@ -174,14 +174,18 @@ export default class Bot {
   localeStep = async () => {
     await this.speak('1. 繁體中文')
     await this.speak('2. English')
+    await this.speak('3. 日本語')
     await this.speak(t('enter_the_number'))
-    const result = await this.read(Parsers.int(), Validators.range(1, 2))
+    const result = await this.read(Parsers.int(), Validators.range(1, 3))
     switch (result) {
       case 1:
         i18n.global.locale.value = 'zh_TW'
         break
       case 2:
         i18n.global.locale.value = 'en_US'
+        break
+      case 3:
+        i18n.global.locale.value = 'ja_JP'
         break
     }
     this.run(this.menuStep)
