@@ -15,8 +15,8 @@
   "menu_intro_4": "4. 更換語系",
   "menu_intro_5": "順帶一提吃掉我不在選項中喔！>.0",
   "nanb_guesser_intro": "鼠鼠我想了一個%{count}位數字，各位數不互相重複，你來猜猜看。",
-  "nanb_guesser_ab_0": "%{a}A%{b}B，妳好好加油吧。",
-  "nanb_guesser_ab_1": "%{a}A%{b}B，真虧妳能猜到這裡。",
+  "nanb_guesser_ab_0": "%{a}A%{b}B，你好好加油吧。",
+  "nanb_guesser_ab_1": "%{a}A%{b}B，真虧你能猜到這裡。",
   "nanb_guesser_ab_2": "%{a}A%{b}B，據說真正的答案被藏起來了。",
   "nanb_questioner_guess_0": "我猜......%{guess}？",
   "nanb_questioner_guess_1": "%{guess}對吧？不對的話我可能找一下球棒。",
@@ -37,7 +37,7 @@
   "enter_the_number": "-請輸入數字-(機器音)",
   "input_validate_failed_0": "請你重新組織語言再來跟本鼠說一次嗷",
   "input_validate_failed_1": "我只是一隻鼠鼠，我聽不懂你在講什麼",
-  "input_validate_failed_2": "我在說A妳跟我講B是什麼意思，喔對這是nAnB遊戲",
+  "input_validate_failed_2": "我在說A你跟我講B是什麼意思，喔對這是nAnB遊戲",
   "under_dev": "此功能還在開發中...",
   "leave": "(夢夢已離開聊天室)"
 }
