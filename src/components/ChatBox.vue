@@ -55,7 +55,7 @@ const newMessage = (from, message) => {
     if (endOfSection.value) endOfSection.value = false
   }
   nextTick(() => {
-    markRead()
+    // markRead()
     if (messageEl.value && messageEl.value.scrollTop < 0) {
       isBottom.value = false
     }
