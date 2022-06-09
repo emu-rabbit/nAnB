@@ -45,8 +45,6 @@ const openGithub = () => {
       align-items: center;
       border-bottom: #151515 1px solid;
       font-size: 1.5rem;
-      background-color: #353535;
-      z-index: 2;
 
       img {
         position: absolute;
