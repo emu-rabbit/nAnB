@@ -87,6 +87,7 @@ defineExpose({
 .container {
   width: 100%;
   position: relative;
+  z-index: 1;
 
   .new {
     position: absolute;
@@ -106,7 +107,7 @@ defineExpose({
     padding: 0 6%;
     display: flex;
     flex-direction: column-reverse;
-    overflow-y: scroll;
+    overflow-y: visible;
     scroll-behavior: smooth;
     scrollbar-color: rgb(80, 80, 80) transparent;
     scrollbar-width: thin;

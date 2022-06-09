@@ -85,14 +85,7 @@ export default class Bot {
     await this.speak(result)
     this.run(this.echoStep)
   }
-  safariNoticeStep = async () => {
-    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !localStorage.getItem('safari_notice')) {
-      await this.speakRange('safari_notice', 2)
-      localStorage.setItem('safari_notice', true)
-    }
-  }
   menuStep = async () => {
-    await this.run(this.safariNoticeStep)
     await this.speakRange('menu_intro', 5)
     const result = await this.read(Parsers.int(), Validators.range(1, 4))
     switch (result) {
