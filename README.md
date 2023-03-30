@@ -1,5 +1,5 @@
 ## GitPage
-https://immortalmice.github.io/nAnB/#/chat  
+https://emu-rabbit.github.io/nAnB/#/chat  
   
 這是一個聊天室風格的nAnB機器人  
 夢夢是我家的黃金鼠，她叫夢夢但這是廢話  
